@@ -1,0 +1,14 @@
+name: Scheduled Tasks
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs daily at midnight
+
+jobs:
+  scheduled-task:
+    runs-on: windows-latest
+
+    steps:
+      - name: Run maintenance script
+        run: |
+          # Add your maintenance script here
