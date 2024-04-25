@@ -1,0 +1,19 @@
+name: Custom Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  custom-task:
+    runs-on: windows-latest
+
+    steps:
+      - name: Custom step 1
+        run: |
+          # Add your custom commands or scripts here
+
+      - name: Custom step 2
+        run: |
+          # Add your custom commands or scripts here
