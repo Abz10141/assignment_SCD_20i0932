@@ -19,6 +19,10 @@ jobs:
       - name: Build
         run: npm run build
 
+    permissions:
+      contents: read
+      pages: write
+      
   deploy:
     needs: build
     runs-on: windows-latest
