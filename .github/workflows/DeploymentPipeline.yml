@@ -17,4 +17,4 @@ jobs:
         run: npm install -g netlify-cli
 
       - name: Build and deploy to Netlify
-        run: netlify deploy --prod --auth ${{ secrets.ASSIGNMENT }}
+        run: netlify deploy --prod --auth ${{ secrets.ASSIGNMENT_NETLIFY_AUTH_TOKEN }}
