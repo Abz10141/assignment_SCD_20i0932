@@ -6,34 +6,15 @@ on:
       - main
 
 jobs:
-  build:
+  build_and_deploy:
     runs-on: windows-latest
-
+    
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Install dependencies
-        run: npm install
+      - name: Install Netlify CLI
+        run: npm install -g netlify-cli
 
-      - name: Build
-        run: npm run build
-
-      - name: Build Docker image
-        run: docker build -t heavens-above .
-
-      - name: Log in to Docker Hub
-        run: echo "abdsajid891" | docker login -u "abz1014" --password-stdin
-
-      - name: Push Docker image to Docker Hub
-        run: docker push heavens-above
-
-  deploy:
-    needs: build
-    runs-on: windows-latest
-    steps:
-      - name: Pull Docker image
-        run: docker pull heavens-above
-
-      - name: Run Docker container
-        run: docker run -d -p 3000:3000 --name heavens-above heavens-above
+      - name: Build and deploy to Netlify
+        run: netlify deploy --prod --auth ${{ secrets.ASSIGNMENT }}
