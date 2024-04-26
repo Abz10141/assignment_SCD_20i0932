@@ -26,3 +26,7 @@ jobs:
 
       - name: Run linting
         run: npm run lint
+
+      - name: Lint code
+        run: npx eslint .
+        
