@@ -19,17 +19,21 @@ jobs:
       - name: Build
         run: npm run build
 
-    permissions:
-      contents: read
-      pages: write
-      
+      - name: Build Docker image
+        run: docker build -t heavens-above .
+
+      - name: Log in to Docker Hub
+        run: echo "abdsajid891" | docker login -u "abz1014" --password-stdin
+
+      - name: Push Docker image to Docker Hub
+        run: docker push heavens-above
+
   deploy:
     needs: build
     runs-on: windows-latest
     steps:
-      - name: Deploy to Heroku
-        uses: akhileshns/heroku-deploy@v4
-        with:
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: "Abdullah Sajid"
-          heroku_email: "i200932@nu.edu.pk"
+      - name: Pull Docker image
+        run: docker pull heavens-above
+
+      - name: Run Docker container
+        run: docker run -d -p 3000:3000 --name heavens-above heavens-above
