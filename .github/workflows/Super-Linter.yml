@@ -1,0 +1,25 @@
+name: Super-Linter
+
+on:
+  push:
+    branches-ignore:
+      - 'main' # Exclude the main branch to avoid duplicate checks
+  pull_request:
+    branches:
+      - '*' # Run on all branches for pull requests
+
+jobs:
+  lint:
+    name: Lint code
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run Super-Linter
+        uses: github/super-linter@v4
+        env:
+          VALIDATE_ALL_CODEBASE: true
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
