@@ -1,14 +1,29 @@
-name: Scheduled Tasks
+name: Scheduled Maintenance
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Runs daily at midnight
+    - cron: '0 0 * * *'
 
 jobs:
-  scheduled-task:
+  maintenance:
     runs-on: windows-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
       - name: Run maintenance script
+        shell: cmd
         run: |
-          # Add your maintenance script here
+          REM Add your maintenance script commands here
+          REM Example: Perform database backup
+          echo Performing database backup...
+          REM Command to perform database backup goes here
+
+          REM Example: Clean up temporary files
+          echo Cleaning up temporary files...
+          REM Command to clean up temporary files goes here
+
+          REM Example: Send notification
+          echo Sending maintenance completion notification...
+          REM Command to send notification goes here
