@@ -6,15 +6,33 @@ on:
       - main
 
 jobs:
-  build_and_deploy:
-    runs-on: windows-latest
-    
+  deploy:
+    runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install Netlify CLI
-        run: npm install -g netlify-cli
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
 
-      - name: Build and deploy to Netlify
-        run: netlify deploy --prod --auth ${{ secrets.GITHUB_TOKEN }}
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Docker image
+        run: docker build -t myapp .
+
+      - name: Test
+        run: npm test  # Update with your test command
+        continue-on-error: true
+
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v1
+        with:
+          publish-dir: './public'   
+          deploy-message: 'Deployed using GitHub Actions'  
+          github-token: ${{ secrets.ASSIGNMENT }} 
+          enable-pull-request-comment: 'false'
+

@@ -12,8 +12,9 @@ jobs:
     steps:
       - name: Custom step 1
         run: |
-          # Add your custom commands or scripts here
+          # Add commands to generate release notes, analyze performance metrics,
+          # or perform any other custom task required by the task description.
 
       - name: Custom step 2
         run: |
-          # Add your custom commands or scripts here
+          # Add additional commands or scripts here for further automation.
