@@ -31,8 +31,8 @@ jobs:
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1
         with:
-          publish-dir: './public'   
-          deploy-message: 'Deployed using GitHub Actions'  
-          github-token: ${{ secrets.ASSIGNMENT }} 
+          publish-dir: './public'
+          deploy-message: 'Deployed using GitHub Actions'
+          github-token: ${{ secrets.ASSIGNMENT }}
           enable-pull-request-comment: 'false'
 

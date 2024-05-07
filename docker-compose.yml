@@ -1,0 +1,23 @@
+version: '3.8'  # specifies the Docker Compose file version
+
+services:
+  web:
+    build: .  # specifies the directory containing the Dockerfile, here the same as docker-compose.yml
+    ports:
+      - "3000:3000"  # maps port 3000 of the container to port 3000 on the host
+    environment:
+      DATABASE_URL: postgres://postgres:password@db:5432/myapp  # environment variable for the app
+    depends_on:
+      - db  # ensures db service is started first
+
+  db:
+    image: postgres:12  # uses a pre-built PostgreSQL image
+    environment:
+      POSTGRES_DB: myapp
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # mounts a volume for persistence
+
+volumes:
+  postgres_data:  # declares a volume that persists the database
